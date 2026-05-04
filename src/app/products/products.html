@@ -1,0 +1,78 @@
+<!-- 1. INTERPOLACION {{ }} -->
+<h1 class="text-center">{{titulo}}</h1>
+
+
+<section class="container">
+    <div class="row mb-3">
+
+        <h3>Productos encontrados: {{data.length}}</h3>
+
+        <!-- 2. EVENT BINDING (change) -->
+        <div class="col-md-6">
+            <select (change)="filtrarCat($event)" class="form-control">
+                <option value="all">Todos</option>
+                <option value="jewelery">Jewelery</option>
+                <option value="men's clothing">Men's clothing</option>
+            </select>
+        </div>
+
+        <!-- EVENT BINDING (keyup) -->
+        <div class="col-md-6">
+            <input type="text" class="form-control" placeholder="Buscar por nombre..." (keyup)="filtrarNombre($event)">
+        </div>
+
+        <!-- ALTERNATIVA SIN keyup: TWO-WAY con ngModel -->
+        <div class="col-md-6">
+            <input type="text" class="form-control" placeholder="Buscar por nombre con ngModel..."
+                [(ngModel)]="busqueda" (ngModelChange)="filtrarNombreNgModel()">
+        </div>
+
+    </div>
+
+    <div *ngIf="data.length > 0; else sinResultados">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>title</th>
+                    <th>price</th>
+                    <th>category</th>
+                    <th>image</th>
+                    <th>Accion</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr app-product-card *ngFor="let product of data" [product]="product" (detalle)="detallePro($event)">
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <ng-template #sinResultados>
+        <p>No hay productos que coincidan con la busqueda.</p>
+    </ng-template>
+
+
+    <!-- Modal Bootstrap para detalle -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Detalle del Producto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div *ngIf="detalle">
+                        <p><strong>ID:</strong> {{detalle.id}}</p>
+                        <p><strong>Title:</strong> {{detalle.title}}</p>
+                        <p><strong>Price:</strong> ${{detalle.price}}</p>
+                        <p><strong>Category:</strong> {{detalle.category}}</p>
+                        <img [src]="detalle.image" class="img-fluid">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
