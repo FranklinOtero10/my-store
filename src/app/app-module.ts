@@ -1,29 +1,30 @@
 import { NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { Products } from './products/products';
 import { ProductCard } from './product-card/product-card';
-
+import { ProductDetail } from './product-detail/product-detail';
 
 @NgModule({
   declarations: [
     App,
     Products,
     ProductCard,
-    // Aqui se registra CADA componente que crees
-    // ng generate component lo hace automaticamente
+    ProductDetail,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    // HttpClientModule ira aqui en Clase 6
+    // No usar HttpClientModule aqui
   ],
   providers: [
-    provideBrowserGlobalErrorListeners()
+    provideBrowserGlobalErrorListeners(),
+    provideHttpClient(withInterceptorsFromDi())
   ],
   bootstrap: [App]
 })

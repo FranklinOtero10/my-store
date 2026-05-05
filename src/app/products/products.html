@@ -9,10 +9,11 @@
 
         <!-- 2. EVENT BINDING (change) -->
         <div class="col-md-6">
-            <select (change)="filtrarCat($event)" class="form-control">
-                <option value="all">Todos</option>
-                <option value="jewelery">Jewelery</option>
-                <option value="men's clothing">Men's clothing</option>
+            <select class="form-select" (change)="filtrarCat($event)">
+                <option value="all">Todas</option>
+                <option *ngFor="let category of categories" [value]="category">
+                    {{ category }}
+                </option>
             </select>
         </div>
 

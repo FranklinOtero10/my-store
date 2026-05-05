@@ -4,10 +4,9 @@
 <td>{{product?.category}}</td>
 <td><img height="80px" [src]="product?.image"/></td>
 <td>
-  <button class="btn btn-success btn-sm"
-          (click)="verDetalle()"
-          data-bs-toggle="modal"
-          data-bs-target="#exampleModal">
+  <!-- routerLink construye la URL /product/5, /product/12, etc. -->
+  <a class="btn btn-success btn-sm"
+     [routerLink]="['/product', product?.id]">
     Ver detalle
-  </button>
+  </a>
 </td>

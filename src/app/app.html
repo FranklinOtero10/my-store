@@ -1,16 +1,17 @@
-<!-- Navbar principal aplicado en reuting clase 6 -->
+<!-- Navbar principal — no cambia -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Mi Tienda</a>
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/">Home</a>
+          <a class="nav-link" routerLink="/products">Products</a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
 
-<app-products></app-products>
-<!-- llamado a primer componente que crearas -->
+<!-- Router outlet: Angular inserta aqui el componente de la ruta activa -->
+<!-- En Clase 5 aqui estaba <app-products>, ahora lo gestiona el router -->
+<router-outlet></router-outlet>
