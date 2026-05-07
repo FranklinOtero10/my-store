@@ -1,0 +1,24 @@
+<div class="container mt-5" style="max-width:400px">
+  <h2 class="text-center mb-4">Iniciar sesion</h2>
+
+  <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+
+  <div class="mb-3">
+    <label class="form-label">Usuario</label>
+    <!-- [(ngModel)] usa FormsModule que ya esta en app-module.ts desde Clase 5 -->
+    <input type="text" class="form-control"
+           [(ngModel)]="username" placeholder="mor_2314">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Contrasena</label>
+    <input type="password" class="form-control"
+           [(ngModel)]="password" placeholder="83r5^_">
+  </div>
+
+  <button class="btn btn-primary w-100"
+          (click)="login()"
+          [disabled]="loading">
+    {{loading ? 'Entrando...' : 'Entrar'}}
+  </button>
+</div>

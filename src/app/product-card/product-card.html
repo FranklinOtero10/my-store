@@ -4,9 +4,20 @@
 <td>{{product?.category}}</td>
 <td><img height="80px" [src]="product?.image"/></td>
 <td>
-  <!-- routerLink construye la URL /product/5, /product/12, etc. -->
-  <a class="btn btn-success btn-sm"
-     [routerLink]="['/product', product?.id]">
-    Ver detalle
-  </a>
+  <!-- Botones con iconos y espaciado -->
+  <div class="d-flex gap-2">
+    <!-- Ver detalle: navega a /product/:id -->
+    <a class="btn btn-success btn-sm"
+       title="Ver detalle"
+       [routerLink]="['/product', product?.id]">
+      <i class="bi bi-eye"></i>
+    </a>
+    <!-- Agregar al carrito: solo si hay sesion -->
+    <button class="btn btn-primary btn-sm"
+            (click)="agregarAlCarrito()"
+            title="Agregar al carrito"
+            *ngIf="authService.isLoggedIn()">
+      <i class="bi bi-cart-plus"></i>
+    </button>
+  </div>
 </td>

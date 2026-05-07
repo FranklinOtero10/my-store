@@ -1,0 +1,49 @@
+<div class="container mt-4">
+    <h3>Carrito de compras</h3>
+
+    <table class="table table-striped" *ngIf="items.length > 0">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of items">
+                <td>{{item.title}}</td>
+                <td>${{item.price}}</td>
+                <td>
+                    <button class="btn btn-sm btn-outline-secondary" (click)="restar(item)">-</button>
+                    <span class="mx-2">{{item.quantity}}</span>
+                    <button class="btn btn-sm btn-outline-secondary" (click)="sumar(item)">+</button>
+                </td>
+                <td>${{item.subtotal | number:'1.2-2'}}</td>
+                <td>
+                    <button class="btn btn-sm btn-danger" 
+                        (click)="eliminar(item)" 
+                        title="Eliminar del carrito">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div *ngIf="items.length === 0" class="alert alert-info">Tu carrito esta vacio.</div>
+    <h4 *ngIf="items.length > 0">Total: ${{ total() | number:'1.2-2' }}</h4>
+
+    <div class="text-center ">
+        <button 
+            *ngIf="items.length > 0"
+            class="btn btn-success btn-lg mt-4 "
+            (click)="pagar()"
+            title="Realizar pago"
+            >Pagar
+            <i class="bi bi-credit-card-fill"></i>
+        </button>
+    </div>
+
+</div>

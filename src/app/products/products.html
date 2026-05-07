@@ -30,6 +30,12 @@
 
     </div>
 
+    <!-- Estado de carga -->
+  <div *ngIf="cargando" class="text-center py-5">
+    <div class="spinner-border" role="status"></div>
+    <p class="mt-2">Cargando productos...</p>
+  </div>
+
     <div *ngIf="data.length > 0; else sinResultados">
         <table class="table table-bordered table-hover">
             <thead>

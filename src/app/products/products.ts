@@ -16,14 +16,16 @@ export class Products implements OnInit {
   data: any = [];
   detalle: any = null;
   categories: any = [];
+  cargando: boolean = false;
 
   // Constructor — ahora inyecta el servicio en lugar del HttpClient directo
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
+    this.cargando = true;
     this.productService.getProducts().subscribe(
-      (response) => { this.data = response; },
-      (error) => { console.error('Error:', error); }
+      (response) => { this.data = response;  this.cargando = false; },
+      (error) => { console.error('Error:', error);  this.cargando = false; }
     );
 
     this.productService.getCategories().subscribe(

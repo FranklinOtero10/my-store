@@ -1,17 +1,41 @@
-<!-- Navbar principal — no cambia -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Mi Tienda</a>
+    <a class="navbar-brand" routerLink="/">Mi Tienda</a>
     <div class="collapse navbar-collapse">
+
+      <!-- Links izquierda -->
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
           <a class="nav-link" routerLink="/products">Products</a>
         </li>
+        <!-- Solo visible si hay sesion activa -->
+        <li class="nav-item" *ngIf="authService.isLoggedIn()">
+          <a class="nav-link" routerLink="/users">Users</a>
+        </li>
       </ul>
+
+      <!-- Links derecha -->
+      <ul class="navbar-nav">
+        <!-- Carrito con contador dinamico -->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/cart">
+            <i class="bi bi-cart3"></i>
+            Carrito ({{contadorCarrito}})
+          </a>
+        </li>
+        <!-- Login — solo si NO hay sesion -->
+        <li class="nav-item" *ngIf="!authService.isLoggedIn()">
+          <a class="nav-link" routerLink="/login">Login</a>
+        </li>
+        <!-- Logout — solo si hay sesion -->
+        <li class="nav-item" *ngIf="authService.isLoggedIn()">
+          <a class="nav-link" style="cursor:pointer"
+             (click)="logout()">Logout</a>
+        </li>
+      </ul>
+
     </div>
   </div>
 </nav>
 
-<!-- Router outlet: Angular inserta aqui el componente de la ruta activa -->
-<!-- En Clase 5 aqui estaba <app-products>, ahora lo gestiona el router -->
 <router-outlet></router-outlet>
