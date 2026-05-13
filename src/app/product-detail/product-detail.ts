@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';          // lee parametros de la URL
 import { ProductService } from '../services/product.service';
 import { CartService } from '../services/cart.service'; // NUEVO
+import { AuthService } from '../services/auth.service'; // NUEVO
+import Swal from 'sweetalert2'; // NUEVO
 
 @Component({
   selector: 'app-product-detail',
@@ -19,7 +21,8 @@ export class ProductDetail implements OnInit {
   constructor(
     private route: ActivatedRoute,   // para leer el :id de la URL
     private productService: ProductService,
-    private cartService: CartService // NUEVO
+    private cartService: CartService, // NUEVO
+    public authService: AuthService // NUEVO
   ) { }
 
   ngOnInit(): void {
@@ -42,9 +45,16 @@ export class ProductDetail implements OnInit {
   }
 
   agregarAlCarrito(): void {
-    if (this.detalle) {
-      this.cartService.addToCart(this.detalle);
-    }
+  if (this.detalle) {
+    this.cartService.addToCart(this.detalle);
+    Swal.fire({
+      title: 'Producto agregado',
+      text: `${this.detalle.title} fue agregado a tu carrito`,
+      icon: 'success',
+      confirmButtonColor: '#28a745',
+      confirmButtonText: 'OK'
+    });
   }
+}
   
 }

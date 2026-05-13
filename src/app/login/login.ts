@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-//import { CartService } from '../services/cart.service';  // NUEVO — para cargar carrito del usuario
+import { CartService } from '../services/cart.service';  // NUEVO — para cargar carrito del usuario
 
 @Component({
   selector:    'app-login',
@@ -19,7 +19,7 @@ export class Login {
 
   constructor(
     private authService: AuthService,
-   // private cartService: CartService,  // NUEVO
+    private cartService: CartService,
     private router:      Router
   ) { }
 
@@ -29,9 +29,7 @@ export class Login {
 
     this.authService.login(this.username, this.password).subscribe(
       (response) => {
-        // El token y currentUser ya estan en localStorage (los guarda AuthService)
-        // Cargar el carrito del usuario que acaba de entrar
-        //this.cartService.loadCartForCurrentUser();  // NUEVO
+        this.cartService.loadCartForCurrentUser();
         this.router.navigate(['/products']);  // redirige al catalogo
       },
       (error) => {

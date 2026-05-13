@@ -8,6 +8,7 @@ import { Cart }  from './cart/cart';             // NUEVO
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
+  { path: '',            redirectTo: '/products', pathMatch: 'full' },
   { path: 'products', component: Products },
   { path: 'product/:id', component: ProductDetail },
   { path: 'login', component: Login },

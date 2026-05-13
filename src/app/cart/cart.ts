@@ -45,7 +45,7 @@ export class Cart implements OnInit {
   }
 
   pagar(): void {
-    const total : number = this.total();
+    const total: Number = Number(this.total().toFixed(2));
     Swal.fire({
       title:              '¿Realizar el pago?',
       text:               `¿Se realizara el pago por la cantidad de: $${total}`,

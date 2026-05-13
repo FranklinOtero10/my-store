@@ -21,7 +21,9 @@
         <p><strong>Categoria:</strong> {{detalle.category}}</p>
         <p><strong>Rating:</strong> {{detalle.rating?.rate}} ({{detalle.rating?.count}} resenas)</p>
         <p>{{detalle.description}}</p>
-        <button class="btn btn-primary me-2 " (click)="agregarAlCarrito()">
+        <button class="btn btn-primary ms-4"
+                *ngIf="authService.isLoggedIn()"
+                (click)="agregarAlCarrito()">
           <i class="bi bi-cart-plus"></i> Agregar al carrito
         </button>
         <!-- Volver a la lista -->
